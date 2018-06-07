@@ -1,23 +1,27 @@
+/*
+ * Copyright (c) 2018. GRGBanking
+ * @File: Person.java
+ * @Description:
+ * @Author: sunys
+ * @Date: 18-6-7 下午9:54
+ * @since:
+ */
+
 package com.syshlang.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.Date;
 
-@Table(name = "JPA_USER")
+@Table(name="JPA_PERSONS")
 @Entity
-public class User {
+public class Person {
+
     private Integer id;
     private String lastName;
 
     private String email;
     private Date birth;
 
-    private Address address;
-
-    private Integer addressId;
 
     @GeneratedValue
     @Id
@@ -53,19 +57,9 @@ public class User {
         this.birth = birth;
     }
 
-    public Address getAddress() {
-        return address;
-    }
-
-    public void setAddress(Address address) {
-        this.address = address;
-    }
-
-    public Integer getAddressId() {
-        return addressId;
-    }
-
-    public void setAddressId(Integer addressId) {
-        this.addressId = addressId;
+    @Override
+    public String toString() {
+        return "Person [id=" + id + ", lastName=" + lastName + ", email="
+                + email + ", brith=" + birth + "]";
     }
 }

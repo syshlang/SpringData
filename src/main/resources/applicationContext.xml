@@ -27,9 +27,11 @@
     <bean id="entityManagerFactory"
           class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
         <property name="dataSource" ref="dataSource"></property>
+        <!--jpa是是实现产品的适配器-->
         <property name="jpaVendorAdapter">
             <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter"></bean>
         </property>
+        <!--扫描加注解的包-->
         <property name="packagesToScan" value="com.syshlang"></property>
         <property name="jpaProperties">
             <props>
@@ -48,4 +50,21 @@
             </props>
         </property>
     </bean>
+
+    <!-- 3. 配置事务管理器 -->
+    <bean id="transactionManager"
+          class="org.springframework.orm.jpa.JpaTransactionManager">
+        <property name="entityManagerFactory" ref="entityManagerFactory"></property>
+    </bean>
+
+    <!-- 4. 配置支持注解的事务 -->
+    <tx:annotation-driven transaction-manager="transactionManager"/>
+
+    <!-- 5. 配置 SpringData -->
+    <!-- 加入  jpa 的命名空间 -->
+    <!-- base-package: 扫描 Repository Bean 所在的 package -->
+    <jpa:repositories base-package="com.syshlang"
+                      entity-manager-factory-ref="entityManagerFactory">
+    </jpa:repositories>
+
 </beans>
