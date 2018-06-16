@@ -3,14 +3,21 @@
  * @File: Person.java
  * @Description:
  * @Author: sunys
- * @Date: 18-6-7 下午9:54
+ * @Date: 18-6-17 上午1:42
  * @since:
  */
 
 package com.syshlang.entity;
 
-import javax.persistence.*;
 import java.util.Date;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 @Table(name="JPA_PERSONS")
 @Entity
@@ -22,6 +29,9 @@ public class Person {
     private String email;
     private Date birth;
 
+    private Address address;
+
+    private Integer addressId;
 
     @GeneratedValue
     @Id
@@ -55,6 +65,25 @@ public class Person {
 
     public void setBirth(Date birth) {
         this.birth = birth;
+    }
+
+    @Column(name="ADD_ID")
+    public Integer getAddressId() {
+        return addressId;
+    }
+
+    public void setAddressId(Integer addressId) {
+        this.addressId = addressId;
+    }
+
+    @JoinColumn(name="ADDRESS_ID")
+    @ManyToOne
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
     }
 
     @Override
