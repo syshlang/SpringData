@@ -1,6 +1,6 @@
 package com.syshlang;
 
-
+import com.syshlang.common.AddressRepository;
 import com.syshlang.entity.Person;
 import com.syshlang.repository.PersonRepsotory;
 import com.syshlang.service.PersonService;
@@ -271,5 +271,10 @@ public class AppTest
         personRepsotory.test();
     }
 
-
+    @Test
+    public void testCommonCustomRepositoryMethod(){
+        ApplicationContext ctx1 = new ClassPathXmlApplicationContext("classpath:applicationContext1.xml");
+        AddressRepository addressRepository = ctx1.getBean(AddressRepository.class);
+        addressRepository.method();
+    }
 }
